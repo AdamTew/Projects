@@ -1,0 +1,6 @@
+# imports headers from a file, logs into a website, and parses the page source
+for id in $(curl -L -b headers.txt  http://example.com | egrep -o class=\"[a-z0-9]+ | egrep -o [0-9a-z]+$)
+do
+	# with the parsed ids from above this code will iteratively download files based on the parse
+	curl -o ~/Downloads/csv/$id.csv -L -b headers.txt -d "param=$id" http://example.com
+done
